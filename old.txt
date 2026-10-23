@@ -1,0 +1,70 @@
+            <div className={styles.successIcon}>✓</div>
+            <div>
+              <strong style={{ display: 'block', fontSize: '15px' }}>¡Magia Completada!</strong> 
+              <span style={{ fontSize: '14px', opacity: 0.9 }}>Se procesaron exitosamente {result.filas.length} filas de {result.cuentas} cuenta(s).</span>
+            </div>
+          </div>
+
+          <div className={styles.mappingSection}>
+            <h3>⚙️ Confirmar Columnas</h3>
+            
+            {template.map(col => (
+              <div className={styles.mappingRow} key={col.id}>
+                <div className={styles.columnName}>
+                  <span className={styles.colBadge}>COL</span>
+                  {col.titulo}
+                </div>
+                <div className={styles.arrow}>→</div>
+                <div className={styles.selectWrapper}>
+                  <select 
+                    value={col.origen} 
+                    onChange={e => {
+                      const val = e.target.value;
+                      handleColumnMapChange(col.id, isNaN(Number(val)) ? val : Number(val));
+                    }}
+                  >
+                    <option value="fecha">🪄 Fecha Inteligente</option>
+                    <option value="cod">🪄 Código de Cuenta</option>
+                    <option value="desc">🪄 Descripción de Cuenta</option>
+                    <option value="ref">🪄 Referencia / Comprobante</option>
+                    <option value="mov">🪄 Movimiento Neto (Débito - Crédito)</option>
+                    <option value="debito">🪄 Débito</option>
+                    <option value="credito">🪄 Crédito</option>
+                    <option disabled>────── Columnas detectadas del Excel ──────</option>
+                    {(result.encabezadosOriginales || []).map((enc, idx) => (
+                      <option key={idx} value={idx}>
+                        Columna original: {enc || `(Sin título ${idx + 1})`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button 
+            className={styles.advancedToggle} 
+            onClick={() => setShowAdvanced(!showAdvanced)}
+          >
+            {showAdvanced ? '▼ Ocultar opciones avanzadas' : '▶ Configuración por Cliente (Avanzado)'}
+          </button>
+
+          {showAdvanced && (
+            <div className={styles.advancedPanel}>
+              <div className={styles.inputGroup}>
+                <label>Vincular a Cliente (SharePoint)</label>
+                <input 
+                  type="text" 
+                  value={clienteActual} 
+                  onChange={e => setClienteActual(e.target.value)} 
+                  placeholder="Ej: BHI Consultora..."
+                />
+              </div>
+              <button className={styles.btnSecondary} onClick={loadTemplateFromSharePoint}>Cargar</button>
+              <button className={styles.btnSecondary} onClick={saveTemplateToSharePoint}>Guardar</button>
+            </div>
+          )}
+
+          <button className={styles.downloadBtn} onClick={exportarAExcel}>
+            ⬇️ Descargar Excel Formateado
+          </button>

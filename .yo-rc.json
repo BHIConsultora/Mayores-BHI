@@ -1,0 +1,22 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "Portal-BHI",
+    "environment": "spo",
+    "skipFeatureDeployment": true,
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "FormateadorDeMayores",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.18.1",
+    "sdksVersions": {},
+    "version": "1.23.2",
+    "libraryName": "portal-bhi",
+    "libraryId": "fe8cdc95-48c4-4545-974a-09aec5e722a3",
+    "packageManager": "npm",
+    "solutionShortDescription": "Portal-BHI description",
+    "isDomainIsolated": false
+  }
+}
