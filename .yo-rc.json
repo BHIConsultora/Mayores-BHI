@@ -1,0 +1,19 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "useGulp": false,
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.18.1",
+    "sdksVersions": {},
+    "version": "1.23.2",
+    "libraryName": "bhi-suite",
+    "libraryId": "aa58deea-118d-4980-a713-b52ad6283f6f",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "BHI-Suite",
+    "solutionShortDescription": "BHI-Suite description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "bhi-suite-client-side-solution",
+    "id": "aa58deea-118d-4980-a713-b52ad6283f6f",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.23.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "BHI-Suite description"
+      },
+      "longDescription": {
+        "default": "BHI-Suite description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "bhi-suite Feature",
+        "description": "The feature that activates elements of the bhi-suite solution.",
+        "id": "3ddec94f-bb2c-4a40-a0b8-e6ae6fc0220d",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/bhi-suite.sppkg"
+  }
+}
