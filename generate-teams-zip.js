@@ -1,0 +1,78 @@
+const fs = require('fs');
+const archiver = require('archiver');
+const path = require('path');
+
+const output = fs.createWriteStream(path.join(__dirname, 'teams', 'FormateadorDeMayores.zip'));
+const archive = archiver('zip', { zlib: { level: 9 } });
+
+output.on('close', function() {
+  console.log(archive.pointer() + ' total bytes');
+  console.log('Zip file created successfully at teams/FormateadorDeMayores.zip');
+});
+
+archive.on('error', function(err) {
+  throw err;
+});
+
+archive.pipe(output);
+
+const manifest = {
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.1.0",
+  "id": "fe8cdc95-48c4-4545-974a-09aec5e722a3",
+  "packageName": "portal-bhi-client-side-solution",
+  "developer": {
+    "name": "Equipo BI",
+    "websiteUrl": "https://bhiconsultorajb.sharepoint.com",
+    "privacyUrl": "https://bhiconsultorajb.sharepoint.com",
+    "termsOfUseUrl": "https://bhiconsultorajb.sharepoint.com"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "BHI Suite",
+    "full": "BHI Suite Contable"
+  },
+  "description": {
+    "short": "BHI Suite",
+    "full": "Centro de herramientas de BHI Consultora."
+  },
+  "accentColor": "#0284c7",
+  "staticTabs": [
+    {
+      "entityId": "0634f18a-c589-47d7-84bf-1f374a2e80ee",
+      "name": "BHI Suite",
+      "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId=0634f18a-c589-47d7-84bf-1f374a2e80ee%26forceLocale={locale}",
+      "scopes": ["personal"]
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId=0634f18a-c589-47d7-84bf-1f374a2e80ee%26forceLocale={locale}",
+      "canUpdateConfiguration": false,
+      "scopes": ["team", "groupchat"]
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "00000003-0000-0ff1-ce00-000000000000",
+    "resource": "https://{teamSiteDomain}"
+  },
+  "validDomains": [
+    "*.login.microsoftonline.com",
+    "*.sharepoint.com",
+    "*.sharepoint-df.com",
+    "spoppe-a.akamaihd.net",
+    "spoprod-a.akamaihd.net",
+    "resourceseng.blob.core.windows.net",
+    "msft.spoppe.com"
+  ]
+};
+
+archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
+archive.file(path.join(__dirname, 'teams', 'color.png'), { name: 'color.png' });
+archive.file(path.join(__dirname, 'teams', 'outline.png'), { name: 'outline.png' });
+
+archive.finalize();
